@@ -7,6 +7,7 @@ import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
 import UnstyledButton from '../UnstyledButton'
 import Icon from '../Icon'
+import VisuallyHidden from '../VisuallyHidden'
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -20,30 +21,32 @@ const Header = () => {
     <header>
       <SuperHeader />
       <MainHeader>
-        <Side>
+        <LogoWrapper>
           <Logo />
-        </Side>
-        <Nav>
+        </LogoWrapper>
+        <DesktopNav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
-        </Nav>
-        <Side>
-          <MobileNav>
-            <UnstyledButton>
-              <Icon id="shopping-bag" strokeWidth={2} />
-            </UnstyledButton>
-            <UnstyledButton>
-              <Icon id="search" strokeWidth={2} />
-            </UnstyledButton>
-            <UnstyledButton>
-              <Icon id="menu" strokeWidth={2} />
-            </UnstyledButton>
-          </MobileNav>
-        </Side>
+        </DesktopNav>
+        <MobileActions>
+          <ShoppingBagButton>
+            <Icon id="shopping-bag" strokeWidth={2} />
+            <VisuallyHidden>Open cart</VisuallyHidden>
+          </ShoppingBagButton>
+          <UnstyledButton>
+            <Icon id="search" strokeWidth={2} />
+            <VisuallyHidden>Search</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton>
+            <Icon id="menu" strokeWidth={2} />
+            <VisuallyHidden>Open menu</VisuallyHidden>
+          </UnstyledButton>
+        </MobileActions>
+        <Filler />
       </MainHeader>
 
       <MobileMenu
@@ -64,10 +67,16 @@ const MainHeader = styled.div`
   @media ${QUERIES.tabletAndSmaller} {
     justify-content: space-between;
     align-items: center;
+    border-top: 4px solid ${COLORS.gray[900]};
+  }
+  
+  @media ${QUERIES.phoneAndSmaller} {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 `;
 
-const Nav = styled.nav`
+const DesktopNav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
@@ -77,13 +86,25 @@ const Nav = styled.nav`
   }
 `;
 
-const Side = styled.div`
+const LogoWrapper = styled.div`
   flex: 1;
   
   @media ${QUERIES.tabletAndSmaller} {
     flex: revert;
   }
 `;
+
+const Filler = styled.div`
+  flex: 1;
+  
+  @media ${QUERIES.tabletAndSmaller} {
+    display: none;
+  }
+`
+
+const ShoppingBagButton = styled(UnstyledButton)`
+  transform: translateX(-2px);
+`
 
 const NavLink = styled.a`
   font-size: 1.125rem;
@@ -97,17 +118,16 @@ const NavLink = styled.a`
   }
 `;
 
-const MobileNav = styled.div`
+const MobileActions = styled.div`
   display: none;
   
   @media ${QUERIES.tabletAndSmaller} {
     display: flex;
-    gap: 40px;
+    gap: 32px;
   }
 
   @media ${QUERIES.phoneAndSmaller} {
-    display: flex;
-    gap: 20px;
+    gap: 16px;
   }
 `
 
