@@ -3,8 +3,6 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 
-import { COLORS, QUERIES, WEIGHTS } from '../../constants';
-
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
 import VisuallyHidden from '../VisuallyHidden';
@@ -50,7 +48,7 @@ const Overlay = styled(DialogOverlay)`
 const Content = styled(DialogContent)`
   width: 300px;
   height: 100%;
-  background-color: ${COLORS.white};
+  background-color: var(--color-white);
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -70,14 +68,14 @@ const Nav = styled.nav`
 `;
 
 const NavLink = styled.a`
-  color: ${COLORS.gray[900]};
-  font-weight: ${WEIGHTS.medium};
+  color: var(--color-gray-900);
+  font-weight: var(--weight-medium);
   text-decoration: none;
   font-size: 1.125rem;
   text-transform: uppercase;
 
   &:first-of-type {
-    color: ${COLORS.secondary};
+    color: var(--color-secondary);
   }
 `;
 
@@ -94,7 +92,7 @@ const Filler = styled.div`
 `
 
 const FooterLink = styled.a`
-  color: ${COLORS.gray[700]};
+  color: var(--color-gray-700);
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;

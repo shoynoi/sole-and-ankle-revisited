@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { QUERIES, WEIGHTS } from '../../constants';
+import { QUERIES } from '../../constants';
 
 import Breadcrumbs from '../Breadcrumbs';
 import Select from '../Select';
@@ -108,7 +108,7 @@ const MobileBreadcrumbs = styled.div`
 
 const Title = styled.h2`
   font-size: 1.5rem;
-  font-weight: ${WEIGHTS.medium};
+  font-weight: var(--weight-medium);
 `;
 
 export default ShoeIndex;
