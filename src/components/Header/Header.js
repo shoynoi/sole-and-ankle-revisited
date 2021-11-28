@@ -15,34 +15,38 @@ const Header = () => {
   return (
     <header>
       <SuperHeader />
-      <MainHeader>
-        <LogoWrapper>
-          <Logo />
-        </LogoWrapper>
-        <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
-        </DesktopNav>
-        <MobileActions>
-          <ShoppingBagButton>
-            <Icon id="shopping-bag" strokeWidth={2} />
-            <VisuallyHidden>Open cart</VisuallyHidden>
-          </ShoppingBagButton>
-          <UnstyledButton>
-            <Icon id="search" strokeWidth={2} />
-            <VisuallyHidden>Search</VisuallyHidden>
-          </UnstyledButton>
-          <UnstyledButton onClick={() => setShowMobileMenu(true)}>
-            <Icon id="menu" strokeWidth={2} />
-            <VisuallyHidden>Open menu</VisuallyHidden>
-          </UnstyledButton>
-        </MobileActions>
-        <Filler />
-      </MainHeader>
+      <Scroll>
+        <MainHeader>
+          <LogoWrapper>
+            <Logo />
+          </LogoWrapper>
+          <DesktopNav>
+            <NavLink href="/sale">Sale</NavLink>
+            <NavLink href="/new">New&nbsp;Releases</NavLink>
+            <NavLink href="/men">Men</NavLink>
+            <NavLink href="/women">Women</NavLink>
+            <NavLink href="/kids">Kids</NavLink>
+            <NavLink href="/collections">Collections</NavLink>
+            <NavLink href="/collections">Collections</NavLink>
+            <NavLink href="/collections">Collections</NavLink>
+          </DesktopNav>
+          <MobileActions>
+            <ShoppingBagButton>
+              <Icon id="shopping-bag" strokeWidth={2} />
+              <VisuallyHidden>Open cart</VisuallyHidden>
+            </ShoppingBagButton>
+            <UnstyledButton>
+              <Icon id="search" strokeWidth={2} />
+              <VisuallyHidden>Search</VisuallyHidden>
+            </UnstyledButton>
+            <UnstyledButton onClick={() => setShowMobileMenu(true)}>
+              <Icon id="menu" strokeWidth={2} />
+              <VisuallyHidden>Open menu</VisuallyHidden>
+            </UnstyledButton>
+          </MobileActions>
+          <Filler />
+        </MainHeader>
+      </Scroll>
 
       <MobileMenu
         isOpen={showMobileMenu}
@@ -51,6 +55,10 @@ const Header = () => {
     </header>
   );
 };
+
+const Scroll = styled.div`
+  overflow: auto;
+`
 
 const MainHeader = styled.div`
   display: flex;
@@ -73,7 +81,7 @@ const MainHeader = styled.div`
 
 const DesktopNav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(1rem, 2.5vw + 1rem, 5rem);
   margin: 0px 48px;
   
   @media ${QUERIES.tabletAndSmaller} {
@@ -101,7 +109,7 @@ const ShoppingBagButton = styled(UnstyledButton)`
   transform: translateX(-2px);
 `
 
-export const NavLink = styled.a`
+const NavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
