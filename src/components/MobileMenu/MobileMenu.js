@@ -3,35 +3,29 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 
-import { COLORS, QUERIES } from '../../constants';
+import { COLORS, QUERIES, WEIGHTS } from '../../constants';
 
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
 import VisuallyHidden from '../VisuallyHidden';
-import { NavLink } from '../Header/Header'
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <Overlay onDismiss={onDismiss} isOpen={isOpen} >
       <Content>
-        <CloseButtonWrapper>
-          <CloseButton onClick={onDismiss}>
-            <Icon id="close" strokeWidth={2} />
-          </CloseButton>
+        <CloseButton onClick={onDismiss}>
+          <Icon id="close" strokeWidth={2} />
           <VisuallyHidden>Dismiss menu</VisuallyHidden>
-        </CloseButtonWrapper>
-        <MobileNav>
+        </CloseButton>
+        <Filler />
+        <Nav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
-        </MobileNav>
+        </Nav>
         <Footer>
           <FooterLink href="/terms">Terms and Conditions</FooterLink>
           <FooterLink href="/privacy">Privacy Policy</FooterLink>
@@ -49,53 +43,54 @@ const Overlay = styled(DialogOverlay)`
   right: 0;
   bottom: 0;
   background-color: rgba(96, 100, 100, 0.8);
+  display: flex;
+  justify-content: flex-end;
 `
 
 const Content = styled(DialogContent)`
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  min-width: 300px;
+  width: 300px;
+  height: 100%;
   background-color: ${COLORS.white};
   padding: 32px;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  gap: 16px;
-`
-
-const CloseButtonWrapper = styled.div`
-  align-self: flex-end;
-  margin-top: -16px;
-  margin-right: -16px;
 `
 
 const CloseButton = styled(UnstyledButton)`
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: ${COLORS.gray[700]};
-  width: 48px;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  padding: 16px;
 `
 
-const MobileNav = styled.div`
+const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  align-items: flex-start;
-  justify-content: center;
-  flex: 1;
-`
+`;
+
+const NavLink = styled.a`
+  color: ${COLORS.gray[900]};
+  font-weight: ${WEIGHTS.medium};
+  text-decoration: none;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+
+  &:first-of-type {
+    color: ${COLORS.secondary};
+  }
+`;
 
 const Footer = styled.footer`
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 16px;
+`
+
+const Filler = styled.div`
+  flex: 1
 `
 
 const FooterLink = styled.a`
