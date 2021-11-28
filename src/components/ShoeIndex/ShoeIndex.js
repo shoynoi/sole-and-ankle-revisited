@@ -9,8 +9,8 @@ import Spacer from '../Spacer';
 import ShoeSidebar from '../ShoeSidebar';
 import ShoeGrid from '../ShoeGrid';
 
-const ShoeIndex = ({ sortId, setSortId }) => {
-  const breadcrumbs = (
+const ShoeBreadcrumbs = () => {
+  return (
     <Breadcrumbs>
       <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
       <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
@@ -19,16 +19,20 @@ const ShoeIndex = ({ sortId, setSortId }) => {
       </Breadcrumbs.Crumb>
     </Breadcrumbs>
   )
+}
 
+const ShoeIndex = ({ sortId, setSortId }) => {
   return (
     <Wrapper>
       <MainColumn>
         <Header>
-          <TitleWrapper>
-            <BreadcrumbsWrapper>{breadcrumbs}</BreadcrumbsWrapper>
+          <div>
+            <MobileBreadcrumbs>
+              <ShoeBreadcrumbs />
+            </MobileBreadcrumbs>
             <Title>Running</Title>
-          </TitleWrapper>
-          <SelectWrapper>
+          </div>
+          <SortFilterWrapper>
             <Select
               label="Sort"
               value={sortId}
@@ -37,16 +41,18 @@ const ShoeIndex = ({ sortId, setSortId }) => {
               <option value="newest">Newest Releases</option>
               <option value="price">Price</option>
             </Select>
-          </SelectWrapper>
+          </SortFilterWrapper>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
       </MainColumn>
-      <DesktopLeftColumn>
-        {breadcrumbs}
+      <LeftColumn>
+        <DesktopBreadcrumbs>
+          <ShoeBreadcrumbs />
+        </DesktopBreadcrumbs>
         <Spacer size={42} />
         <ShoeSidebar />
-      </DesktopLeftColumn>
+      </LeftColumn>
     </Wrapper>
   );
 };
@@ -58,7 +64,7 @@ const Wrapper = styled.div`
   gap: 32px;
 `;
 
-const DesktopLeftColumn = styled.div`
+const LeftColumn = styled.div`
   flex-basis: 248px;
   
   @media ${QUERIES.tabletAndSmaller} {
@@ -76,22 +82,23 @@ const Header = styled.header`
   align-items: baseline;
 
   @media ${QUERIES.tabletAndSmaller} {
-    align-items: center;
+    align-items: flex-end;
   }
 `;
 
-const TitleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const SelectWrapper = styled.div`
+const SortFilterWrapper = styled.div`
   @media ${QUERIES.phoneAndSmaller} {
     display: none;
   }
 `
 
-const BreadcrumbsWrapper = styled.div`
+const DesktopBreadcrumbs = styled.div`
+  @media ${QUERIES.tabletAndSmaller} {
+    display: none;
+  }
+`
+
+const MobileBreadcrumbs = styled.div`
   display: none;
 
   @media ${QUERIES.tabletAndSmaller} {
